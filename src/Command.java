@@ -18,35 +18,38 @@ public class Command {
     private Client client;
     private Serveur serveur;
 
-    List<Plat> Plates = new ArrayList<>();
+    List<LigneCommande> lignes = new ArrayList<>();
 
-    public Order(int commandId, int commandDate, Client client, Waiter waiter) {
-        this.commandId = count++;
-        this.commandDate = commandDate;
+    public Command(Client client, int commandDate, int commandId, Serveur serveur) {
         this.client = client;
-        this.waiter = waiter;
+        this.commandDate = commandDate;
+        this.commandId = commandId;
+        this.serveur = serveur;
     }
 
-    public void addPlat(Plat d) {
-        Plats.add(d);
+    public void addLigne(Plat p, int quantite) {
+        LigneCommande lignes = new LigneCommande(p, quantite);
+        this.lignes.add(lignes);
     }
 
     public double calculateTotal() {
         double total = 0;
-        for (Plat d : Plates) {
-            total += d.getPrice();
+        for (LigneCommande l : lignes) {
+            total += l.getSousTotal();
         }
         return total;
     }
-
+//             +==== display =====+
     public void display() {
         System.out.println("client nom: " + " " + client.getNom());
         System.out.println("pris par: " + " " + serveur.getServeur());
+        System.out.println("command Id: " + " " + commandId);
 
         System.out.println("");
-        for (Plat d : Plates) {
-            System.out.println("client nom: " + " " + d.getNom() + "id:" + " " + d.getId());
+        for (LigneCommande l : lignes) {
+            System.out.println(l.getQuantite() + "x" + l.getPlat().getPrix() + "=" + l.getSousTotal() + "DH");
         }
+        System.out.println("Total: " + calculateTotal() + "DH");
     }
 
     public int getCommandId() {
@@ -81,11 +84,12 @@ public class Command {
         this.serveur = serveur;
     }
 
-    public List<Plat> getPlates() {
-        return Plates;
+    @Override
+    public String toString() {
+        return "Command [commandId=" + commandId + ", commandDate=" + commandDate + ", client=" + client + ", serveur="
+                + serveur + ", lignes=" + lignes + ", calculateTotal()=" + calculateTotal();
     }
 
-    public void setPlates(List<Plat> Plates) {
-        this.Plates = Plates;
-    }
+    
+
 }
