@@ -4,7 +4,7 @@ import java.util.List;
 public class Resturant {
     private String nom;
     private List<Plat> plats;
-    private Command commands;
+    private List<Command> commands;
     public Resturant(String nom) {
         this.nom = nom;
         this.plats = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Resturant {
     }
     public void getCommands(){
         for (Command c : commands){
-            System.out.println(c.getCommandId + " - " + c.getCommandDate);
+            System.out.println(c.getCommandId() + " - " + c.getCommandDate());
         }
     }
     public String getNom() {
