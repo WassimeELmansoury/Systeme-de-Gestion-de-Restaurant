@@ -199,8 +199,5 @@ public class Main {
 
         } while (c != 3);
 
-
-
-
     }
 }
