@@ -1,4 +1,7 @@
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +16,27 @@ public class Command {
     }
 
     private int commandId;
-    private int commandDate;
+    private String commandDate;
+    LocalDate myDateObj = LocalDate.now();
     private static int count = 1;
     private Client client;
     private Serveur serveur;
+    private static int commandCounter = 1;
 
-    List<LigneCommande> lignes = new ArrayList<>();
+    private static List<LigneCommande> lignes = new ArrayList<>();
 
-    public Command(Client client, int commandDate, int commandId, Serveur serveur) {
+    public Command(Client client, Serveur serveur) {
         this.client = client;
-        this.commandDate = commandDate;
-        this.commandId = commandId;
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        this.commandDate =  myDateObj.format(myFormatObj);
+        this.commandId = commandCounter++;
         this.serveur = serveur;
     }
 
     public void addLigne(Plat p, int quantite) {
         LigneCommande lignes = new LigneCommande(p, quantite);
         this.lignes.add(lignes);
+        System.out.println("Client " + client.getNom() + " a passé la commande NR " + getCommandId() + ", Serveur: " + getServeur().getNom() +" Total: " + lignes.getSousTotal() + "Mad");
     }
 
     public double calculateTotal() {
@@ -42,10 +49,8 @@ public class Command {
 //             +==== display =====+
     public void display() {
         System.out.println("client nom: " + " " + client.getNom());
-        System.out.println("pris par: " + " " + serveur.getServeur());
+        System.out.println("pris par: " + " " + serveur.getPerson());
         System.out.println("command Id: " + " " + commandId);
-
-        System.out.println("");
         for (LigneCommande l : lignes) {
             System.out.println(l.getQuantite() + "x" + l.getPlat().getPrix() + "=" + l.getSousTotal() + "DH");
         }
@@ -60,12 +65,8 @@ public class Command {
         this.commandId = commandId;
     }
 
-    public int getCommandDate() {
+    public String getCommandDate() {
         return commandDate;
-    }
-
-    public void setCommandDate(int commandDate) {
-        this.commandDate = commandDate;
     }
 
     public Client getClient() {
