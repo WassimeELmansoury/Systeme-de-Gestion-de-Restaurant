@@ -13,4 +13,8 @@ public class PlatDeJour extends Plat{
     public void setDay(String day) {
         this.day = day;
     }
+    @Override
+    public void getPlat(){
+        System.out.println(getNom() + " - " + getPrix() + "DH - " + day);
+    }
 }

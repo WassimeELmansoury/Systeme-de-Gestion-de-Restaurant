@@ -13,4 +13,9 @@ public class PlatSpecial extends Plat{
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public void getPlat(){
+        System.out.println(getNom() + " - " + getPrix() + "DH - " + type);
+    }
 }

@@ -32,4 +32,8 @@ public class Plat {
     public void setPrix(double prix) {
         this.prix = prix;
     }
+
+    public void getPlat(){
+        System.out.println(nom + " - " + prix + "DH - ");
+    }
 }
