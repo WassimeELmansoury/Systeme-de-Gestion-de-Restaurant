@@ -4,15 +4,17 @@ import java.util.List;
 public class Serveur extends Person {
     private List<String> commandes;
 
-    public Serveur(String nom, int idPerson) {
-        super(nom, idPerson);
+    public Serveur(String nom) {
+        super(nom);
         commandes = new ArrayList<>();
     }
 
-    @Override
     public void prendreCommande(String demande) {
         commandes.add(demande);
         System.out.println("Serveur " + getNom() + " a pris la commande: " + demande);
+    }
+    public String afficherServeur(){
+        return nom ;
     }
 
     public List<String> getCommandes() {

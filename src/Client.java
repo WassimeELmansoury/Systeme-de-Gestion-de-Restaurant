@@ -1,20 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Client extends Person {
     private List<Command> commandes;
 
-    public Client(String nom, int idPerson) {
-        super(nom, idPerson);
+    public Client(String nom) {
+        super(nom);
         commandes = new ArrayList<>();
     }
     @Override
-    public void passerCommande(String demande) {
-        commandes.add(demande);
-        System.out.println("Client " + getNom() + " a passé la commande: " + demande.getCommandId());
+    public String getPerson(){
+        return nom + " - " + idPerson;
+    }
+    public void afficherClient(){
+        System.out.println(nom + " id: " + idPerson);
+    }
+    public void passerCommande( Serveur s) {
+        commandes.add(new Command(this,s));
+
     }
 
-    public List<String> getCommandes() {
+    public List<Command> getCommandes() {
         return commandes;
     }
 }
