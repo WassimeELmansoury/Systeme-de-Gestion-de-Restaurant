@@ -102,7 +102,6 @@ public class Main {
             c = sc.nextInt();
 
             switch (c) {
-
                 case 1:
                     System.out.print("Nom plat : ");
                     String nom = sc.next();
